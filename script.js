@@ -55,7 +55,6 @@ async function getQuestions(amount=5)
 
 // getQuestions()
 let scoreGlobal=0;
-const resetButton=document.getElementById('reset-btn')
 submitButton.addEventListener('click',(e)=>{
     e.preventDefault();
     // const formData=new FormData(questionForm);
@@ -144,3 +143,16 @@ function startTimer()
     }
     ,1000);
 }
+
+
+const resetButton=document.getElementById('reset-btn')
+
+resetButton.addEventListener('click', ()=>{
+    startButton.classList.remove('hidden');
+    questionForm.innerHTML=`
+    <form action="/w" id="questionForm">
+            <button type="submit" id="submitButton" class="hidden"> SUBMIT</button>
+            <button class="hidden" id="reset-btn">RESET</button>
+        </form>
+    `
+})
