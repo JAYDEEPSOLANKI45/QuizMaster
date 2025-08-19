@@ -112,25 +112,26 @@ submitButton.addEventListener('click',(e)=>{
         5:${correct_answer_list[0]}`)
     
 });
+let timerInterval; 
 
-function startTimer()
-{
+function startTimer() {
     const timer=document.getElementById('timer');
-    let timeAfter=new Date().getTime()+120000
-    console.log(timeAfter)
-    // add 120,000 milliseconds to the current time in milliseconds
-    setInterval(()=>{
+    let timeAfter=new Date().getTime()+120000;
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(()=>{
         let seconds=new Date().getTime()
         if(!testSubmitted)
         {
-                if(Math.floor(timeAfter/1000)==Math.floor(seconds/1000))
+            if(Math.floor(timeAfter/1000)==Math.floor(seconds/1000))
             {
                 alert(`Your score is ${scoreGlobal}/5`)
                 testSubmitted=true
                 timer.innerText="Time Left: 00:00"
+                clearInterval(timerInterval); 
             }
-            else if(!testSubmitted){
-                let minutes=Math.floor((timeAfter-seconds)/60000) //minutes
+            else {
+                let minutes=Math.floor((timeAfter-seconds)/60000) 
                 seconds=Math.floor((((timeAfter-seconds))%60000)/1000)
                 timer.innerText=`Time left: ${minutes}:${seconds}`
             }
@@ -138,13 +139,10 @@ function startTimer()
         else
         {
             timer.innerText="Time Left: 00:00"
+            clearInterval(timerInterval);
         }
-        
-    }
-    ,1000);
+    },1000);
 }
-
-
 
 resetButton.addEventListener('click', () => {
     startButton.classList.remove('hidden');
@@ -158,6 +156,8 @@ resetButton.addEventListener('click', () => {
     correct_answer_list = [];
     scoreGlobal = 0;
 
-    document.getElementById('timer').innerText = "Time Left: 00:00";
-});
+    const timer=document.getElementById('timer');
+    timer.innerText = "Time Left: 00:00";
 
+    clearInterval(timerInterval);
+});
