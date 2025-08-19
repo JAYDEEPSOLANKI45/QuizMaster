@@ -12,13 +12,19 @@
             Time Left: 00:00
         </div>
     </header>
+
     <section id="questionSection">
-        <button id="start-btn" onclick="getQuestions()">Start Test?</button>
-        <form action="/w" id="questionForm">
-            <button type="submit" id="submitButton" class="hidden"> SUBMIT</button>
-            <button class="hidden" id="reset-btn">RESET</button>
-        </form>
-    </section>
+    <button id="start-btn" onclick="getQuestions()">Start Test?</button>
+    
+    <form action="/w" id="questionForm">
+    </form>
+
+    <div id="controls">
+        <button id="submitButton" class="hidden">SUBMIT</button>
+        <button id="reset-btn" class="hidden">RESET</button>
+    </div>
+</section>
+
 
     
     <script src="script.js"></script>

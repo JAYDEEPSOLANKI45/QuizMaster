@@ -4,6 +4,8 @@
 const questionForm=document.getElementById('questionForm');
 const startButton=document.getElementById('start-btn')
 const submitButton=document.getElementById('submitButton');
+const resetButton=document.getElementById('reset-btn')
+
 let testSubmitted=false;
 
 let correct_answer=[]; //index of correct answer
@@ -53,11 +55,9 @@ async function getQuestions(amount=5)
     });
 }
 
-// getQuestions()
 let scoreGlobal=0;
 submitButton.addEventListener('click',(e)=>{
     e.preventDefault();
-    // const formData=new FormData(questionForm);
     submitButton.classList.add('hidden')
     resetButton.classList.remove('hidden')
     testSubmitted=true;
@@ -145,14 +145,19 @@ function startTimer()
 }
 
 
-const resetButton=document.getElementById('reset-btn')
 
-resetButton.addEventListener('click', ()=>{
+resetButton.addEventListener('click', () => {
     startButton.classList.remove('hidden');
-    questionForm.innerHTML=`
-    <form action="/w" id="questionForm">
-            <button type="submit" id="submitButton" class="hidden"> SUBMIT</button>
-            <button class="hidden" id="reset-btn">RESET</button>
-        </form>
-    `
-})
+    submitButton.classList.add('hidden');
+    resetButton.classList.add('hidden');
+
+    document.getElementById("questionForm").innerHTML = "";
+
+    testSubmitted = false;
+    correct_answer = [];
+    correct_answer_list = [];
+    scoreGlobal = 0;
+
+    document.getElementById('timer').innerText = "Time Left: 00:00";
+});
+
